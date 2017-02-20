@@ -8,7 +8,7 @@ import java.sql.SQLException;
  * Created by admin on 16.02.2017.
  */
 public class ConnectionToDB {
-    private static final String url = "jdbc:mysql://localhost:3306/Students";
+    private static final String url = "jdbc:mysql://localhost:3306/todoList";
     private static final String user = "root";
     private static final String password = "";
 
