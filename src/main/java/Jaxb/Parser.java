@@ -1,7 +1,5 @@
 package Jaxb;
 
-import DataObjects.Tasks;
-
 import javax.xml.bind.JAXBException;
 import java.io.File;
 

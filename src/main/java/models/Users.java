@@ -1,9 +1,11 @@
-package DataObjects;
+package models;
 
-import models.Model;
-import models.User;
+import DataManager.DataManager;
+import DataObjects.Type;
+import DataObjects.User;
 
 import javax.xml.bind.annotation.*;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -39,5 +41,26 @@ public class Users extends Model {
         while(rs.next()){
             users.add(new User(rs.getInt("id"), rs.getString("name")));
         }
+    }
+
+    public void fromXmlToDb() throws SQLException {
+        System.out.println("fromXmlToDb");
+        String classname = "";
+        for (User user :
+                users) {
+            classname = user.getClass().getName();
+            insert(user.getId(), user.getName());
+            DataManager.writeTableRecordsId(classname, user.getId());
+        }
+
+    }
+
+    public static void insert(int id, String name) throws SQLException {
+        String sql = "INSERT INTO users (id, name) VALUES (?, ?)";
+
+        PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        preparedStatement.setString(2, name);
+        preparedStatement.executeUpdate();
     }
 }

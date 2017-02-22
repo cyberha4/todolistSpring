@@ -7,10 +7,10 @@ import java.lang.reflect.Method;
 /**
  * Created by admin on 20.02.2017.
  */
-public class Thread implements Runnable {
+public class ReadThread implements Runnable {
     private String tableName;
 
-    public Thread(String tableName) {
+    public ReadThread(String tableName) {
         this.tableName = tableName;
     }
 

@@ -1,4 +1,6 @@
-package models;
+package DataObjects;
+
+import models.Model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -11,7 +13,7 @@ import java.sql.SQLException;
  */
 @XmlRootElement(name = "task")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Task extends Model {
+public class Task {
     private int id;
     private User user;
     private int status_id;
@@ -90,21 +92,4 @@ public class Task extends Model {
         this.text = text;
     }
 
-    public static Task findById(int id) throws SQLException {
-        ResultSet rs = getResultSet("SELECT * FROM tasks LEFT JOIN users ON tasks.user_id=users.id WHERE tasks.id = "+id);
-        Task task = null;
-        while(rs.next()){
-            System.out.println(rs.getString("name"));
-            task = new Task(rs.getInt("id"),
-                    new User(rs.getInt("user_id"), rs.getString("name")),
-                    rs.getInt("status_id"),
-                    rs.getInt("type_id"),
-                    rs.getString("title"),
-                    rs.getString("annotation"),
-                    rs.getString("text")
-            );
-        }
-        return task;
-
-    }
 }

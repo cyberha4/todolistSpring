@@ -1,4 +1,6 @@
-package models;
+package DataObjects;
+
+import models.Model;
 
 import javax.xml.bind.annotation.*;
 import java.sql.ResultSet;
@@ -9,7 +11,7 @@ import java.sql.SQLException;
  */
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class User extends Model {
+public class User {
     //@XmlAttribute(name = "id")
     private int id;
     private String name;
@@ -38,16 +40,5 @@ public class User extends Model {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public static User findUserById(int id) throws SQLException {
-        ResultSet rs = getResultSet("SELECT * FROM users WHERE id = "+id);
-        User user = null;
-        while(rs.next()){
-            //System.out.println(rs.getString("name"));
-            user = new User(rs.getInt("id"), rs.getString("name"));
-        }
-        return user;
-
     }
 }

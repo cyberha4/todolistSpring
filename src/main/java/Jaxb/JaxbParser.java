@@ -14,7 +14,7 @@ import java.io.File;
 
 public class JaxbParser implements Parser {
     public static final String pathToSrialize = "Xml";
-    public static final String locationModels = "DataObjects";
+    public static final String locationModels = "models";
 
     @Deprecated
     public Object getObject(File file, Class c) throws JAXBException {
