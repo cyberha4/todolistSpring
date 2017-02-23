@@ -1,0 +1,28 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Gradle : lab-work2(todoList).war (exploded)">
+    <output-path>$PROJECT_DIR$/build/libs/exploded/lab-work2(todoList).war</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$">
+        <manifest>TWFuaWZlc3QtVmVyc2lvbjogMS4wDQoNCg==</manifest>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/build/libs/exploded/lab-work2(todoList).war/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="lab-work2(todoList)_main/web/Web Gradle : lab-work2(todoList).war" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="lab-work2(todoList)_main" />
+          <element id="dir-copy" path="$PROJECT_DIR$/build/resources/main" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Gradle: org.slf4j:slf4j-api:1.7.21" />
+          <element id="library" level="project" name="Gradle: javax.servlet:javax.servlet-api:3.0.1" />
+          <element id="library" level="project" name="Gradle: jstl:jstl:1.2" />
+          <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:5.1.6" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

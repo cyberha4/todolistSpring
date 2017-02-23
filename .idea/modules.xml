@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/lab-work2(todoList).iml" filepath="$PROJECT_DIR$/lab-work2(todoList).iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab-work2(todoList).iml" filepath="$PROJECT_DIR$/.idea/modules/lab-work2(todoList).iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab-work2(todoList)_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lab-work2(todoList)_main.iml" group="lab-work2(todoList)" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab-work2(todoList)_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lab-work2(todoList)_test.iml" group="lab-work2(todoList)" />
     </modules>
   </component>
 </project>

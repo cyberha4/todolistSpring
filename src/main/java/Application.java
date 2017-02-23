@@ -30,8 +30,8 @@ public class Application {
 
     public static void main(String[] args) throws SQLException, JAXBException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, InterruptedException {
 
-//        System.out.println(Model.getStatement().execute("ALTER TABLE `tasks` ADD CONSTRAINT `tasksusers` "+"" +
-//                "FOREIGN KEY (`user_id`) REFERENCES `todoList`.`users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;\n"));
+        System.out.println(Model.getStatement().execute("ALTER TABLE `tasks` ADD CONSTRAINT `tasksusers` "+"" +
+                "FOREIGN KEY (`user_id`) REFERENCES `todoList`.`users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;\n"));
 
         //loadFromDbToXml();
 
