@@ -1,0 +1,9 @@
+TRACE   2017-02-23 21:59:25,151 [main] Application  - test
+TRACE   2017-02-23 22:10:12,285 [main] Application  - test
+TRACE   2017-02-23 22:21:32,985 [main] Application  - test
+TRACE   2017-02-23 22:33:49,186 [main] Application  - test
+TRACE   2017-02-24 06:30:26,556 [main] Application  - test
+TRACE   2017-02-24 06:31:19,947 [main] Application  - test
+ERROR   2017-02-24 06:31:19,949 [main] Application  - test
+TRACE   2017-02-24 06:33:02,515 [main] Application  - test
+ERROR   2017-02-24 06:33:02,518 [main] Application  - test

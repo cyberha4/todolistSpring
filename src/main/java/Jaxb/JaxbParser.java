@@ -1,6 +1,8 @@
 package Jaxb;
 
 import javafx.application.Application;
+import org.apache.log4j.Logger;
+import org.apache.log4j.xml.DOMConfigurator;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -13,40 +15,51 @@ import java.io.File;
  */
 
 public class JaxbParser implements Parser {
+    public static final Logger logger = Logger.getLogger(JaxbParser.class);
+    static {
+        DOMConfigurator.configure("log4j.xml");
+    }
     public static final String pathToSrialize = "Xml";
     public static final String locationModels = "models";
 
-    @Deprecated
-    public Object getObject(File file, Class c) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(c);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Object object = unmarshaller.unmarshal(file);
 
-        return object;
-    }
-
-    public Object getObject(Class c) throws JAXBException {
+    public Object getObject(Class c) {
         File file = new File(pathToSrialize+"/"+c.getCanonicalName()+".xml");
-
-        JAXBContext context = JAXBContext.newInstance(c);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Object object = unmarshaller.unmarshal(file);
-
+        Object object = null;
+        try {
+            JAXBContext context = JAXBContext.newInstance(c);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            object = unmarshaller.unmarshal(file);
+            System.out.println("unmarshal");
+        } catch (JAXBException e) {
+            logger.error("Problems with JAXB", e);
+            e.printStackTrace();
+        }
         return object;
     }
-@Deprecated
-    public void saveObject(File file, Object o) throws JAXBException {
 
-        JAXBContext context = JAXBContext.newInstance(o.getClass());
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.marshal(o,file);
-    }
-
-    public void saveObject(Object o) throws JAXBException {
+    public void saveObject(Object o) {
         File file = new File(pathToSrialize+"/"+o.getClass().getCanonicalName()+".xml");
 
-        JAXBContext context = JAXBContext.newInstance(o.getClass());
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.marshal(o,file);
+        JAXBContext context = null;
+        try {
+            context = JAXBContext.newInstance(o.getClass());
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.marshal(o,file);
+        } catch (JAXBException e) {
+            logger.error("Problems with JAXB", e);
+            e.printStackTrace();
+        }
     }
+
+    @Override
+    public Object getObject(File file, Class c) throws JAXBException {
+        return null;
+    }
+
+    @Override
+    public void saveObject(File file, Object o) throws JAXBException {
+
+    }
+
 }

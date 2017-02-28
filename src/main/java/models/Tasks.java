@@ -60,11 +60,9 @@ public class Tasks extends Model {
 
     public Tasks setAllForSer() throws SQLException {
 
-        System.out.println("!!!!!!!!!!!!!!!!!!");
         String sql = "SELECT * FROM tasks LEFT JOIN users ON tasks.user_id=users.id";
         ResultSet rs = getResultSet(sql);
         while(rs.next()){
-            System.out.println(rs.getInt("users.id"));
             tasks.add(new Task(
                     rs.getInt("tasks.id"),
                     new User(rs.getInt("users.id"), rs.getString("name")),
@@ -88,8 +86,6 @@ public class Tasks extends Model {
             while (!DataManager.isContainsRecordsId(classname, user.getId())){
                 Thread.yield();
             }
-
-
             String sql = "INSERT INTO tasks (id, user_id, title) VALUES (?, ?, ?)";
 
             PreparedStatement preparedStatement = getConnection().prepareStatement(sql);

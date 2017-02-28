@@ -8,9 +8,12 @@ import models.Model;
 import DataObjects.Task;
 import models.Types;
 import models.Users;
+import org.apache.log4j.Logger;
+import org.apache.log4j.xml.DOMConfigurator;
 
 import javax.xml.bind.JAXBException;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -27,46 +30,65 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by admin on 19.02.2017.
  */
 public class Application {
+    private static final Logger logger = Logger.getLogger(Application.class);
+    static {
+        DOMConfigurator.configure("log4j.xml");
+    }
+    public static void main(String[] args) {
 
-    public static void main(String[] args) throws SQLException, JAXBException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, InterruptedException {
+        Application app = new Application();
 
-        System.out.println(Model.getStatement().execute("ALTER TABLE `tasks` ADD CONSTRAINT `tasksusers` "+"" +
-                "FOREIGN KEY (`user_id`) REFERENCES `todoList`.`users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;\n"));
-
-        //loadFromDbToXml();
-
-        loadFromXmlToDb();
-
-       Thread.sleep(3000);
-       DataManager.printHashMap();
+        //app.loadFromDbToXml();
+//
+        //ClearDb.clearAllTables();
+        app.loadFromXmlToDb();
+//
+       try {
+           Thread.sleep(1500);
+           DataManager.printHashMap();
+       } catch (InterruptedException e) {
+           e.printStackTrace();
+       }
     }
 
-    static private void loadFromDbToXml() throws SQLException {
-        ResultSet rs = Model.getResultSet("SHOW TABLES");
-        String tableName;
-        while (rs.next()){
-            tableName = rs.getString(1).substring(0, 1).toUpperCase() + rs.getString(1).substring(1);
-            System.out.println(tableName);
-            (new java.lang.Thread(new ReadThread(tableName))).start();
+    public void loadFromDbToXml() {
+        ResultSet rs = null;
+        try {
+            rs = Model.getResultSet("SHOW TABLES");
+            String tableName;
+            while (rs.next()){
+                tableName = rs.getString(1).substring(0, 1).toUpperCase() + rs.getString(1).substring(1);
+                System.out.println(tableName);
+                (new java.lang.Thread(new ReadThread(tableName))).start();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    private static void loadFromXmlToDb(){
+    public void loadFromXmlToDb(){
         File folder = new File("Xml");
         String className;
         File[] folderEntries = folder.listFiles();
         Thread wThread;
-        for (File entry : folderEntries)
-        {
-            //Здесь запускаем потоки
-            if (!entry.isDirectory())
+        if (folderEntries != null) {
+            for (File entry : folderEntries)
             {
-                className = entry.getName().substring(0, entry.getName().length()-4);
-//
-                wThread = new java.lang.Thread(new WriteThread(className));
-                wThread.setName(className);
-                wThread.start();
+                System.out.println(entry.getName());
+                //Здесь запускаем потоки
+                if (!entry.isDirectory())
+                {
+                    className = entry.getName().substring(0, entry.getName().length()-4);
+
+                    System.out.println(className);
+    //
+                    wThread = new Thread(new WriteThread(className));
+                    //wThread.setName(className);
+                    wThread.start();
+                }
             }
+        } else {
+            logger.error("XML files not found");
         }
     }
 }

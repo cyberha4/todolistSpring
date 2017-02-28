@@ -7,7 +7,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by admin on 21.02.2017.
  */
 public class DataManager {
-    private static ConcurrentHashMap<String, HashSet<Integer>> hashMap = new ConcurrentHashMap<String, HashSet<Integer>>();
     private static ConcurrentHashMap<String, HashSet<Integer>> tableRecordsId = new ConcurrentHashMap<String, HashSet<Integer>>();
     private static final Object obj = new Object();
 

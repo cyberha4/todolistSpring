@@ -8,7 +8,7 @@ import java.io.File;
  */
 public interface Parser {
     Object getObject(File file, Class c) throws JAXBException;
-    Object getObject(Class c) throws JAXBException;
+    Object getObject(Class c);
     void saveObject(File file, Object o) throws JAXBException;
-    void saveObject(Object o) throws JAXBException;
+    void saveObject(Object o);
 }

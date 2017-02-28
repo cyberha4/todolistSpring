@@ -1,5 +1,6 @@
 package DataObjects;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -9,8 +10,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "status")
 @XmlAccessorType(XmlAccessType.FIELD)
+@Entity
+@Table(name= "statuses")
 public class Status {
+    @Id
+    @Column(name= "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name= "status")
     private String status;
 
     public int getId() {

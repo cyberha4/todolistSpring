@@ -7,11 +7,23 @@ import java.sql.SQLException;
  */
 public class ClearDb {
     public static void main(String[] args) throws SQLException, InterruptedException {
-        System.out.println(Model.getStatement().execute("ALTER TABLE tasks DROP FOREIGN KEY tasksusers"));
-        System.out.println(Model.getStatement().execute("TRUNCATE TABLE `users`"));
-        System.out.println(Model.getStatement().execute("TRUNCATE TABLE `tasks`"));
-        System.out.println(Model.getStatement().execute("TRUNCATE TABLE `types`"));
-        System.out.println(Model.getStatement().execute("TRUNCATE TABLE `statuses`"));
+        clearAllTables();
+    }
+
+    public static void clearAllTables(){
+
+        try {
+            Model.getStatement().execute("ALTER TABLE tasks DROP FOREIGN KEY TasksToUser");
+            Model.getStatement().execute("TRUNCATE TABLE `users`");
+            Model.getStatement().execute("TRUNCATE TABLE `tasks`");
+            Model.getStatement().execute("TRUNCATE TABLE `types`");
+            Model.getStatement().execute("TRUNCATE TABLE `statuses`");
+            String sql = "ALTER TABLE `tasks` ADD CONSTRAINT `TasksToUser` FOREIGN KEY (`user_id`)"
+                    +" REFERENCES `todoList`.`users`(`id`) ON DELETE CASCADE ON UPDATE RESTRICT";
+            Model.getStatement().execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }
