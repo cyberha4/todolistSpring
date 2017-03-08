@@ -12,7 +12,7 @@
 // To declare projects as part of a multi-project build use the 'include' method
 include 'shared'
 include 'api'
-include 'services:webservice'
+include 'com.cyberha4.services:webservice'
 */
 
 rootProject.name = 'lab-work2(todoList)'

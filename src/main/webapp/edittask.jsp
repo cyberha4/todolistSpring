@@ -1,5 +1,5 @@
-<%@ page import="models.pojo.Task" %>
-<%@ page import="common.UsefulFunc" %><%--
+<%@ page import="com.cyberha4.models.pojo.Task" %>
+<%@ page import="com.cyberha4.common.UsefulFunc" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 27.02.2017

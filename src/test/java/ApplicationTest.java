@@ -1,4 +1,6 @@
-import models.Model;
+import com.cyberha4.Application;
+import com.cyberha4.ClearDb;
+import com.cyberha4.models.Model;
 import org.junit.Test;
 
 import java.io.File;
