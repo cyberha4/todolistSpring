@@ -1,3 +1,5 @@
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
 <%@ taglib prefix="c"
            uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -24,21 +26,23 @@
         <th></th>
     </tr>
 
+
 <c:forEach items="${tasksList}" var="task">
 
     <tr>
     <td><c:out value="${task.id}"></c:out></td>
     <td><c:out value="${task.title}"></c:out></td>
     <td><c:out value="${task.annotation}"></c:out></td>
-    <td><c:out value="${task.statusId}"></c:out></td>
+    <td><c:out value="${statuses[task.statusId]}"></c:out></td>
     <td><c:out value="${task.typeId}"></c:out></td>
     <td><c:out value="${task.text}"></c:out></td>
     <td><c:out value="${task.user.login}"></c:out></td>
 
-        <td><a href="/<c:out value="${baseUrl}" />/edittask?id=${task.id}">edit</a>
+        <td><a href="/<c:out value="${baseUrl}" />/task/edit?id=${task.id}">edit</a>
             /
-        <a href="/<c:out value="${baseUrl}" />/delete?id=${task.id}">del</a></td>
-        <a href="/<c:out value="${baseUrl}" />/complete?id=${task.id}">del</a></td>
+        <a href="/<c:out value="${baseUrl}" />/task/delete?id=${task.id}">del</a>
+            /
+        <a href="/<c:out value="${baseUrl}" />/task/complete?id=${task.id}">complete</a></td>
     </tr>
 
     <%--<c:out value="${userItem.name}"></c:out>--%>

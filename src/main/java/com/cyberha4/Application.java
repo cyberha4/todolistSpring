@@ -1,7 +1,9 @@
 package com.cyberha4;
 
-import com.cyberha4.DataManager.DataManager;
-import com.cyberha4.models.Model;
+import com.cyberha4.common.oldclasses.DataManager.DataManager;
+import com.cyberha4.common.oldclasses.ReadThread;
+import com.cyberha4.common.oldclasses.WriteThread;
+import com.cyberha4.models.oldclasses.Model;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 

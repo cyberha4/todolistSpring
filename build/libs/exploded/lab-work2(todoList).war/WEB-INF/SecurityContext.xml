@@ -1,0 +1,76 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+                 http://www.springframework.org/schema/security
+                 http://www.springframework.org/schema/security/spring-security-4.2.xsd
+http://www.springframework.org/schema/security http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+    <http use-expressions="true">
+        <access-denied-handler error-page="/error?error=Are you serious? You don't have permissions for this, sick bastard"/>
+        <intercept-url pattern="/task/list" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/task/edit" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/admin/users/list" access="hasRole('ROLE_MODERATOR')"/>
+        <!--<intercept-url pattern="/task/edit" access="hasRole('ROLE_ADMIN')"/>-->
+        <!--<intercept-url pattern="/edittask.jsp" access="hasRole('ROLE_USER')"/>-->
+        <!--<intercept-url pattern="/delete/*" access="hasRole('ROLE_ADMIN')"/>-->
+        <form-login login-page="/login"
+                    login-processing-url="/j_spring_security_check"
+                    username-parameter="j_username"
+                    password-parameter="j_password"
+                    default-target-url="/task/list"
+                    authentication-failure-url="/login?error=wrong password or login stupid idiot"
+        />
+        <logout logout-url="/logout" logout-success-url="/"/>
+        <anonymous username="guest" granted-authority="ROLE_ANONYMOUS"/>
+        <!--<remember-me/>-->
+        <csrf disabled="true"/>
+    </http>
+
+
+    <!--Pool connection config-->
+    <!--<beans:bean name="dataSource"-->
+                <!--class="org.springframework.jndi.JndiObjectFactoryBean">-->
+        <!--<beans:property name="jndiName" value="java:comp/env/jdbc/MyLocalDB" />-->
+    <!--</beans:bean>-->
+
+    <!--<jee:jndi-lookup id="dataSource" jndi-name="jdbc/todolist"-->
+                     <!--expected-type="javax.sql.DataSource" />-->
+
+    <!--<beans:bean id="dataSource"-->
+                <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+
+        <!--<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />-->
+        <!--<beans:property name="url"-->
+                        <!--value="jdbc:mysql://localhost:3306/todoList" />-->
+        <!--<beans:property name="username" value="root" />-->
+        <!--<beans:property name="password" value="" />-->
+    <!--</beans:bean>-->
+
+    <!--<authentication-manager alias="authenticationManager">-->
+        <!--<authentication-provider user-service-ref="UserService" />-->
+    <!--</authentication-manager>-->
+
+
+    <beans:bean id="UserService" class="com.cyberha4.services.UserService"></beans:bean>
+    <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>
+
+
+    <authentication-manager>
+        <!--<authentication-provider>-->
+            <!--<jdbc-user-service data-source-ref="dataSource"-->
+                               <!--users-by-username-query="select login, password, TRUE-->
+      	                                           <!--from users where login = ?"-->
+                               <!--authorities-by-username-query="select login, role-->
+      	                                                 <!--from users-->
+       	                                                <!--where login = ?" />-->
+        <!--</authentication-provider>-->
+        <authentication-provider user-service-ref="UserService">
+            <password-encoder ref="encoder" />
+        </authentication-provider>
+    </authentication-manager>
+
+
+</beans:beans>
+

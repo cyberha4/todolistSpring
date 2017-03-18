@@ -8,10 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <jsp:include page="resources.jsp" />
+
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="header.jsp" />
 <h2>ERROR</h2>
-<h3><%= request.getParameter("message")%></h3>
 </body>
 </html>

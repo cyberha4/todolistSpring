@@ -17,7 +17,7 @@
 <h2>edit task</h2>
 <% Task task = (Task) request.getAttribute("task"); %>
 
-<form action="<%= UsefulFunc.appRoute%>/edittask" method="post">
+<form action="<%= UsefulFunc.appRoute%>/task/edit" method="post">
     <label for="title">title:</label>
     <input type="text" name="title" id="title" value="<%=task.getTitle()%>" placeholder="Input">
     <br>
@@ -47,23 +47,26 @@
 </form>
 
 <spring:form method="post"  modelAttribute="task" action="/todolist/task/edit">
+    <spring:errors path="title" class="control-label" /><br>
     <spring:input path="title"/>
 
     <spring:input path="annotation"/>
-    <%--<spring:select path="statusId">--%>
-        <%--<spring:option value="0" label="testStatus" />--%>
-        <%--<spring:option value="1" label="testStatus1" />--%>
-        <%--<spring:option value="2" label="testStatus2" />--%>
-        <%--<spring:option value="3" label="testStatus3" />--%>
-    <%--</spring:select>--%>
 
+    <spring:errors path="statusId" class="control-label" /><br>
     <spring:select path="statusId" class="form-control">
         <spring:option value="0" label="--- Select ---" />
         <%--@elvariable id="statuses" type="java.util.List"--%>
         <spring:options items="${statuses}" />
     </spring:select><br>
-    <spring:errors path="title" class="control-label" /><br>
-    <spring:errors path="statusId" class="control-label" /><br>
+
+    <spring:errors path="typeId" class="control-label" /><br>
+    <spring:select path="typeId" class="form-control">
+        <spring:option value="0" label="--- Select ---" />
+        <%--@elvariable id="statuses" type="java.util.List"--%>
+        <spring:options items="${types}" />
+    </spring:select><br>
+
+
     <spring:button>Next Page</spring:button>
 </spring:form>
 

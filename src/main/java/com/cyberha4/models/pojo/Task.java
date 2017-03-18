@@ -12,6 +12,25 @@ public class Task {
     private String annotation = "";
     private String text = "";
     private int createdTime;
+    private int finishedTime;
+    private String create;
+    private String finished;
+
+    public String getCreate() {
+        return create;
+    }
+
+    public void setCreate(String create) {
+        this.create = create;
+    }
+
+    public String getFinished() {
+        return finished;
+    }
+
+    public void setFinished(String finished) {
+        this.finished = finished;
+    }
 
     public int getFinishedTime() {
         return finishedTime;
@@ -21,7 +40,6 @@ public class Task {
         this.finishedTime = finishedTime;
     }
 
-    private int finishedTime;
 
     public int getId() {
         return id;
@@ -101,5 +119,13 @@ public class Task {
         this.annotation = annotation;
         this.text = text;
         this.createdTime = createdTime;
+    }
+
+    public boolean isNew(){
+        return getId() > 0;
+    }
+
+    public boolean isNotNew(){
+        return !isNew();
     }
 }

@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
+ACCESS denied
 <h2>ERROR</h2>
 <h3><%= request.getParameter("message")%></h3>
 </body>

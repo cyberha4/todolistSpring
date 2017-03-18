@@ -1,6 +1,6 @@
 package com.cyberha4;
 
-import com.cyberha4.models.Model;
+import com.cyberha4.models.oldclasses.Model;
 
 import java.sql.SQLException;
 

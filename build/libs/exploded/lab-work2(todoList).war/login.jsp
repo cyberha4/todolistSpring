@@ -8,18 +8,30 @@
 </head>
 <body>
 <div>
-    <a href="/todolist/registration">Регистрация</a><br>
+    <a href="/j_spring_security_check">Регистрация</a><br>
     <% String message = (request.getParameter("message") != null) ? request.getParameter("message") : ""; %>
     <h3><%=message %></h3>
-    <form action="/todolist/login" method="post">
+    <form action="/todolist/j_spring_security_check" method="post">
         <label for="login">Login:</label>
-        <input type="text" name="login" id="login" value="" placeholder="логин">
+        <input type="text" name="j_username" id="login" value="" placeholder="логин">
         <br>
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password" value="" placeholder="пароль">
+        <input type="password" name="j_password" id="password" value="" placeholder="пароль"><br>
+
+        <input type="checkbox" name="_spring_security_remember_me"/>
 
         <input type="submit" value="Submit" formmethod="post">
     </form>
+    <h1>Авторизация</h1>
+    <div>
+        <c:url value="/j_spring_security_check" var="loginUrl"/>
+        <form action="${loginUrl}" method="post">
+            <input type="text" name="j_username" placeholder="Login" value="">
+            <input type="password" name="j_password" placeholder="Password" required value="">
+            <button type="submit">Войти</button>
+        </form>
+    </div>
+    <br>
     <p>Path do jsp-directory <%=request.getContextPath()%></p>
 
 </div>
