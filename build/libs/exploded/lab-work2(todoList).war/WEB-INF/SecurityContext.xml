@@ -10,7 +10,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
     <http use-expressions="true">
         <access-denied-handler error-page="/error?error=Are you serious? You don't have permissions for this, sick bastard"/>
         <intercept-url pattern="/task/list" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/task/edit" access="hasRole('ROLE_USER')"/>
+        <!--<intercept-url pattern="/task/edit" access="hasRole('ROLE_USER')"/>-->
         <intercept-url pattern="/admin/users/list" access="hasRole('ROLE_MODERATOR')"/>
         <!--<intercept-url pattern="/task/edit" access="hasRole('ROLE_ADMIN')"/>-->
         <!--<intercept-url pattern="/edittask.jsp" access="hasRole('ROLE_USER')"/>-->

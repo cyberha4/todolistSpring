@@ -143,9 +143,7 @@ public class UserDAO implements UserModel {
         Root<User> root = criteriaQuery.from(User.class);
         criteriaQuery.select(root);
         criteriaQuery.where(
-                criteriaBuilder.and(
                         criteriaBuilder.equal(root.get("login"), "login")
-                )
         );
 
         User user = em.createQuery(criteriaQuery).getSingleResult();

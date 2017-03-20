@@ -1,12 +1,12 @@
 package com.cyberha4.controllers.mvc.Task;
 
+import com.cyberha4.common.exceptions.TaskDaoException;
+import com.cyberha4.common.exceptions.TaskNotExistException;
 import com.cyberha4.controllers.validators.TaskFormValidator;
 import com.cyberha4.models.pojo.Task;
 import com.cyberha4.models.pojo.User;
-import com.cyberha4.services.TasksService;
 import com.cyberha4.services.serviceinterface.TaskServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,15 +40,25 @@ public class EditTaskController extends AbstractTaskController{
     public String editTask(Model model,
                            @RequestParam(name = "id", defaultValue = "0") int id) {
         Task task = new Task();
-        if(id > 0){
-            task = taskService.getTaskById(id);
-        }
-
         model.addAttribute("task", task);
         model.addAttribute("view", "edittask");
 
-        initModel(model);
+        if(id > 0){
+            try {
+                task = taskService.getTaskById(id);
+                initModel(model);
+            } catch (TaskNotExistException e) {
+                model.addAttribute("msg", "Sorry we have some problems, try it later");
+                model.addAttribute("css", "danger");
+                model.addAttribute("view", "welcome");
+            } catch (TaskDaoException e) {
+                model.addAttribute("msg", "This task with id "+id+" not exist");
+                model.addAttribute("css", "error");
+                model.addAttribute("view", "welcome");
+            }
+        }
 
+        initModel(model);
         return "container";
     }
 

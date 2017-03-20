@@ -121,6 +121,19 @@ public class Task {
         this.createdTime = createdTime;
     }
 
+    public Task(int id, User user, int statusId, int typeId, String title, String annotation,
+                String text, String create, String finished) {
+        this.id = id;
+        this.user = user;
+        this.statusId = statusId;
+        this.typeId = typeId;
+        this.title = title;
+        this.annotation = annotation;
+        this.text = text;
+        this.create = create;
+        this.finished = finished;
+    }
+
     public boolean isNew(){
         return getId() > 0;
     }

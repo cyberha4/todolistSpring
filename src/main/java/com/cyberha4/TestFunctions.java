@@ -2,8 +2,11 @@ package com.cyberha4;
 
 import com.cyberha4.common.exceptions.UserDAOException;
 import com.cyberha4.common.oldclasses.DataObjects.Status;
+import com.cyberha4.models.dao.AbstractDao;
 import com.cyberha4.models.dao.UserDAO;
+import com.cyberha4.models.entity.TaskEntity;
 import com.cyberha4.models.entity.UserEntity;
+import com.cyberha4.models.pojo.Task;
 import com.cyberha4.models.pojo.User;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import org.hibernate.Session;
@@ -16,15 +19,14 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.*;
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.net.UnknownServiceException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
+import java.util.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -90,46 +92,68 @@ public class TestFunctions {
 //
 //        System.out.println("------------------------"+user.getLogin());
 
-        DateTimeFormatter date = DateTimeFormatter.ofPattern("2017-01-01");
-        LocalDate localDate = LocalDate.now();
-
-        new java.text.SimpleDateFormat("yyyy-MM-dd");
-
-        java.text.SimpleDateFormat sdf =
-
-                new java.text.SimpleDateFormat("yyyy-MM-dd");
-
-        Calendar c2 = Calendar.getInstance(); c2.setTime(java.sql.Date.valueOf("2017-01-01"));
-        Calendar c1 = Calendar.getInstance(); c2.setTime(java.sql.Date.valueOf("2017-01-2"));
-        System.out.print(c1.after(c2));
-
-        EntityManager em = FACTORY.createEntityManager();
+//        DateTimeFormatter date = DateTimeFormatter.ofPattern("2017-01-01");
+//        LocalDate localDate = LocalDate.now();
+//
+//        new java.text.SimpleDateFormat("yyyy-MM-dd");
+//
+//        java.text.SimpleDateFormat sdf =
+//
+//                new java.text.SimpleDateFormat("yyyy-MM-dd");
+//
+//        Calendar c2 = Calendar.getInstance(); c2.setTime(java.sql.Date.valueOf("2017-01-01"));
+//        Calendar c1 = Calendar.getInstance(); c2.setTime(java.sql.Date.valueOf("2017-01-2"));
+//        System.out.print(c1.after(c2));
+//
+        EntityManager  em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
-        UserEntity userEntity = em.find(UserEntity.class, 1);
-        System.out.println("login -------- "+userEntity.getLogin());
-
-        {
-            try {
-                User user2 = (new UserDAO()).getUserById(1);
-                user2.setEmail("sdfsdfsd");
-                System.out.println(user2.getEmail());
-            } catch (Exception e){
-                System.out.println("!!!!!!!!!!!!EXCEPTION!");
-            }
-        }
-
+//        UserEntity userEntity = em.find(UserEntity.class, 1);
+//        System.out.println("login -------- "+userEntity.getLogin());
+//
+//        TaskEntity task = em.find(TaskEntity.class, 2);
+//        System.out.println("TAsk  -------- "+task.getUser().getEmail());
+//
+//        task.setTitle("hibetTitle");
         UserEntity user = new UserEntity("hyberLogin23", "passdfgdfg", "name", "role", "email@asd23",
                 true);
         user.setId(21);
+//
+        //TaskEntity taskEntity = new TaskEntity(user, 2,2,
+        //        "vvvvv !!!!!", "annot", "text",322323);
+        //taskEntity.setId(35);
+        //taskEntity.setVersion(0L);
+//        AbstractDao.saveOrUpdate(taskEntity);
+
+        TaskEntity task = em.find(TaskEntity.class, 35);
+        task.setTitle("newwwwwww32ds");
+        System.out.println("TAsk  -------- "+task.getUser().getEmail());
 
         try {
             transaction.begin();
-            UserEntity userEntity1 = em.merge(user);
+            em.merge(task);
             transaction.commit();
         } catch (Exception e){
             System.out.println("11111111111111111111111111111111");
             e.printStackTrace();
+        } finally {
+            em.close();
         }
-        em.close();
+
+//        EntityManager em = FACTORY.createEntityManager();
+//        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+//        CriteriaQuery<TaskEntity> criteriaQuery = criteriaBuilder.createQuery(TaskEntity.class);
+//        Root<TaskEntity> root = criteriaQuery.from(TaskEntity.class);
+//        criteriaQuery.select(root);
+//        UserEntity user = new UserEntity();
+//        user.setId(1);
+//        criteriaQuery.where(
+//                criteriaBuilder.equal(root.get("user"), user)
+//        );
+//
+//        List<TaskEntity> list = em.createQuery(criteriaQuery).getResultList();
+//        for (TaskEntity taskEntity : list) {
+//            System.out.println(taskEntity.getTitle());
+//        }
+//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 }
