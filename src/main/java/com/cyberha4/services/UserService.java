@@ -2,6 +2,7 @@ package com.cyberha4.services;
 
 import com.cyberha4.common.exceptions.UserDAOException;
 import com.cyberha4.models.dao.interfaces.UserModel;
+import com.cyberha4.models.entity.UserEntity;
 import com.cyberha4.models.pojo.GrantedAuthorityImpl;
 import com.cyberha4.models.pojo.User;
 import com.cyberha4.services.serviceinterface.UserServiceInterface;
@@ -11,7 +12,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;

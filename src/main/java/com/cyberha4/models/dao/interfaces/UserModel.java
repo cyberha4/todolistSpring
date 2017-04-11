@@ -1,7 +1,9 @@
 package com.cyberha4.models.dao.interfaces;
 
 import com.cyberha4.common.exceptions.UserDAOException;
+import com.cyberha4.models.entity.UserEntity;
 import com.cyberha4.models.pojo.User;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 

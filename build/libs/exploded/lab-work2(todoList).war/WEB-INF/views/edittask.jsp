@@ -42,6 +42,9 @@
     <br>
     <input type="hidden" name="id" id="id" value="<%=task.getId()%>" placeholder="Input">
     <br>
+    <input type="hidden" name="version" id="version" value="<%=task.getVersion()%>" placeholder="Input">
+    <br>
+
 
     <input type="submit" value="Submit">
 </form>

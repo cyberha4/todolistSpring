@@ -18,11 +18,15 @@
 <body>
 <h2>edit task</h2>
 <% Task task = (Task) request.getAttribute("task"); %>
+<%=task.getAnnotation()%><br>Title |
+<c:out value="${newTask.title}"/><br>
 
 <spring:form method="post"  modelAttribute="task" action="/todolist/task/edit">
     <spring:errors path="title" cssClass="error" /><br>
     <spring:label path = "title">Title</spring:label>
     <spring:input type="hidden" path="id"/><br>
+    <spring:input type="hidden" path="version"/><br>
+
     <spring:input path="title"/><br>
 
     <spring:errors path="annotation" cssClass="error" /><br>

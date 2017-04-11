@@ -15,6 +15,15 @@ public class Task {
     private int finishedTime;
     private String create;
     private String finished;
+    private Long version;
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
 
     public String getCreate() {
         return create;

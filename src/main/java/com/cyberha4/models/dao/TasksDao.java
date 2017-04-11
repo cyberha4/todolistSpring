@@ -45,8 +45,8 @@ public class TasksDao extends AbstractDao implements TasksModel{
 
     public List<TaskEntity> getAllTasks(int id) {
 
-//        List<Task> tasksList = new ArrayList<>();
-//        Task task;
+        List<Task> tasksList = new ArrayList<>();
+        Task task;
 //
 //        try (Connection connection = DbConnection.getConnection();
 //             ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM tasks WHERE user_id="+id+

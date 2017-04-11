@@ -3,6 +3,7 @@ package com.cyberha4.services.serviceinterface;
 import com.cyberha4.common.exceptions.TaskDaoException;
 import com.cyberha4.common.exceptions.TaskNotExistException;
 import com.cyberha4.models.pojo.Task;
+import org.hibernate.dialect.lock.OptimisticEntityLockException;
 
 import java.util.List;
 
@@ -14,6 +15,6 @@ public interface TaskServiceInterface {
     public Task getTaskById(Integer id) throws TaskNotExistException, TaskDaoException;
     public boolean isUsersTask(Integer userId, Integer taskId);
     public int insertTask(Task task);
-    public int updateTaskOnId(Task task);
+    public int updateTaskOnId(Task task) throws OptimisticEntityLockException;
     public int deleteTaskById(int id);
 }

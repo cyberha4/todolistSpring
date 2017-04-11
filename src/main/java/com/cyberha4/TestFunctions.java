@@ -39,7 +39,7 @@ import javax.persistence.criteria.Root;
  */
 public class TestFunctions {
 
-    private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("todolist");
+//    private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("todolist");
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException, NamingException, UserDAOException {
         HashSet<Integer> hs = new HashSet<>();
@@ -51,7 +51,7 @@ public class TestFunctions {
         //        .addAnnotatedClass(Status.class);
         //Configuration conf = aconf.configure();
 
-        Class.forName("com.mysql.jdbc.Driver");
+//        Class.forName("com.mysql.jdbc.Driver");
 //        //Hibernate
 //        SessionFactory sessions = new Configuration().addAnnotatedClass(Status.class).configure().buildSessionFactory();
 //        Session session = sessions.openSession();
@@ -105,8 +105,8 @@ public class TestFunctions {
 //        Calendar c1 = Calendar.getInstance(); c2.setTime(java.sql.Date.valueOf("2017-01-2"));
 //        System.out.print(c1.after(c2));
 //
-        EntityManager  em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
+//        EntityManager  em = FACTORY.createEntityManager();
+//        EntityTransaction transaction = em.getTransaction();
 //        UserEntity userEntity = em.find(UserEntity.class, 1);
 //        System.out.println("login -------- "+userEntity.getLogin());
 //
@@ -114,9 +114,9 @@ public class TestFunctions {
 //        System.out.println("TAsk  -------- "+task.getUser().getEmail());
 //
 //        task.setTitle("hibetTitle");
-        UserEntity user = new UserEntity("hyberLogin23", "passdfgdfg", "name", "role", "email@asd23",
-                true);
-        user.setId(21);
+//        UserEntity user = new UserEntity("hyberLogin23", "passdfgdfg", "name", "role", "email@asd23",
+//                true);
+//        user.setId(21);
 //
         //TaskEntity taskEntity = new TaskEntity(user, 2,2,
         //        "vvvvv !!!!!", "annot", "text",322323);
@@ -124,20 +124,20 @@ public class TestFunctions {
         //taskEntity.setVersion(0L);
 //        AbstractDao.saveOrUpdate(taskEntity);
 
-        TaskEntity task = em.find(TaskEntity.class, 35);
-        task.setTitle("newwwwwww32ds");
-        System.out.println("TAsk  -------- "+task.getUser().getEmail());
-
-        try {
-            transaction.begin();
-            em.merge(task);
-            transaction.commit();
-        } catch (Exception e){
-            System.out.println("11111111111111111111111111111111");
-            e.printStackTrace();
-        } finally {
-            em.close();
-        }
+//        TaskEntity task = em.find(TaskEntity.class, 35);
+//        task.setTitle("newwwwwww32ds");
+//        System.out.println("TAsk  -------- "+task.getUser().getEmail());
+//
+//        try {
+//            transaction.begin();
+//            em.merge(task);
+//            transaction.commit();
+//        } catch (Exception e){
+//            System.out.println("11111111111111111111111111111111");
+//            e.printStackTrace();
+//        } finally {
+//            em.close();
+//        }
 
 //        EntityManager em = FACTORY.createEntityManager();
 //        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
@@ -155,5 +155,11 @@ public class TestFunctions {
 //            System.out.println(taskEntity.getTitle());
 //        }
 //        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
+        ArrayList<String> list = new ArrayList<>();
+        list.add("tttt");
+        list.add("ttt22");
+        ArrayList<String> list1 = (ArrayList<String>) list.clone();
+        list1.forEach(System.out::println);
+
     }
 }

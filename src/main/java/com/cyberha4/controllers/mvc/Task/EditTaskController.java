@@ -1,12 +1,16 @@
 package com.cyberha4.controllers.mvc.Task;
 
+import com.cyberha4.common.converter.ConveterPojoEntity;
 import com.cyberha4.common.exceptions.TaskDaoException;
 import com.cyberha4.common.exceptions.TaskNotExistException;
 import com.cyberha4.controllers.validators.TaskFormValidator;
+import com.cyberha4.models.entity.TaskEntity;
 import com.cyberha4.models.pojo.Task;
 import com.cyberha4.models.pojo.User;
 import com.cyberha4.services.serviceinterface.TaskServiceInterface;
+import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,13 +44,12 @@ public class EditTaskController extends AbstractTaskController{
     public String editTask(Model model,
                            @RequestParam(name = "id", defaultValue = "0") int id) {
         Task task = new Task();
-        model.addAttribute("task", task);
+
         model.addAttribute("view", "edittask");
 
         if(id > 0){
             try {
                 task = taskService.getTaskById(id);
-                initModel(model);
             } catch (TaskNotExistException e) {
                 model.addAttribute("msg", "Sorry we have some problems, try it later");
                 model.addAttribute("css", "danger");
@@ -58,6 +61,7 @@ public class EditTaskController extends AbstractTaskController{
             }
         }
 
+        model.addAttribute("task", task);
         initModel(model);
         return "container";
     }
@@ -112,8 +116,24 @@ public class EditTaskController extends AbstractTaskController{
             return modelAndView;
         }
 
+        modelAndView.addObject("newTask",
+                task
+        );
+
         if (task.getId()>0){
-            taskService.updateTaskOnId(task);
+            try {
+                taskService.updateTaskOnId(task);
+            } catch (ObjectOptimisticLockingFailureException e){
+                try {
+                    modelAndView.addObject("newTask",
+                            taskService.getTaskById(task.getId())
+                    );
+                    modelAndView.addObject("view", "edittask");
+                    return modelAndView;
+                } catch (TaskNotExistException | TaskDaoException e1) {
+                    e1.printStackTrace();
+                }
+            }
         }else {
             User userInSession = getUserFromSession(session);
             User user = new User();
